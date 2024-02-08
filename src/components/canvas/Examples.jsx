@@ -57,12 +57,24 @@ export const Logo = ({ route = '/blob', ...props }) => {
 export function Duck(props) {
   const { scene } = useGLTF('/duck.glb')
 
-  useFrame((state, delta) => (scene.rotation.y += delta))
+  useFrame((state, delta) => (scene.rotation.y += delta));
+  const [meshParent] = useState(false);
 
   return <primitive object={scene} {...props} />
 }
 export function Dog(props) {
-  const { scene } = useGLTF('/dog.glb')
-
-  return <primitive object={scene} {...props} />
+  const { nodes, materials } = useGLTF('/dog.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh onClick={() => { console.log(5); }} geometry={nodes.character_dog.geometry} material={materials['Beige.017']} rotation={[Math.PI / 2, 0, 0]}>
+        <mesh onClick={() => { console.log(2); }} geometry={nodes.character_dogArmLeft.geometry} material={materials['Beige.017']} position={[0.204, 0, -0.634]} />
+        <mesh onClick={() => { console.log(3); }} geometry={nodes.character_dogArmRight.geometry} material={materials['Beige.017']} position={[-0.204, 0, -0.634]} />
+        <group onClick={() => { console.log(4); }} position={[0, 0, -0.704]}>
+          <mesh geometry={nodes.Cube1339.geometry} material={materials['Beige.017']} />
+          <mesh geometry={nodes.Cube1339_1.geometry} material={materials['Red.034']} />
+          <mesh geometry={nodes.Cube1339_2.geometry} material={materials['Black.026']} />
+        </group>
+      </mesh>
+    </group>
+  )
 }

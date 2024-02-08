@@ -16,4 +16,20 @@
     padding: 0;
     overflow: hidden;
   }
+
+  .mesh-paren {
+    display: none;
+  }
+
+  .mesh-child-0 {
+    display: none;
+  }
+
+  .mesh-child-1 {
+    display: none;
+  }
+
+  .group-0 {
+    display: none;
+  }
 }
